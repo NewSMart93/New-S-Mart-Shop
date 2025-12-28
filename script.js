@@ -50,6 +50,70 @@ const PRODUCTS = [
     category: "Other",
     description: "Reusable bottle for gym, office and travel.",
     image: "https://via.placeholder.com/300x300?text=Water+Bottle"
+  },
+  {
+    id: 7,
+    name: "Premium CAT6 Ethernet Cable 1M",
+    price: 180,
+    category: "Electronics",
+    description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
+    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+  },
+  {
+    id: 8,
+    name: "Premium CAT6 Ethernet Cable 5M",
+    price: 480,
+    category: "Electronics",
+    description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
+    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+  },
+  {
+    id: 9,
+    name: "Premium CAT6 Ethernet Cable 10M",
+    price: 990,
+    category: "Electronics",
+    description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
+    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+  },
+  {
+    id: 10,
+    name: "Premium CAT6 Ethernet Cable 15M",
+    price: 1300,
+    category: "Electronics",
+    description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
+    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+  },
+  {
+    id: 11,
+    name: "Premium CAT6 Ethernet Cable 20M",
+    price: 1800,
+    category: "Electronics",
+    description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
+    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+  },
+  {
+    id: 12,
+    name: "Premium CAT6 Ethernet Cable 30M",
+    price: 2600,
+    category: "Electronics",
+    description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
+    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+  },
+  {
+    id: 13,
+    name: "Premium CAT6 Ethernet Cable 50M",
+    price: 4800,
+    category: "Electronics",
+    description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
+    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+  },
+  {
+    id: 14,
+    name: "Premium CAT6 Ethernet Cable 100M",
+    price: 9200,
+    category: "Electronics",
+    description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
+    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
   }
 ];
 
@@ -360,3 +424,4 @@ document.addEventListener("DOMContentLoaded", () => {
     renderSummary();
   }
 });
+
