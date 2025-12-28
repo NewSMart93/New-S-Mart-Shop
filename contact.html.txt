@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact - Daraz Seller Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="top-bar">
+  <div class="logo" onclick="goHome()">Daraz Seller</div>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1>Contact</h1>
+  <p>If you have questions about products or orders, please use WhatsApp or email.</p>
+
+  <div class="contact-cards">
+    <div class="contact-card">
+      <h2>WhatsApp</h2>
+      <p>Chat directly for quick support.</p>
+      <!-- Replace with your real WhatsApp number in script.js -->
+      <button class="btn-primary full-width" onclick="openWhatsAppContact()">Message on WhatsApp</button>
+    </div>
+
+    <div class="contact-card">
+      <h2>Email</h2>
+      <p>Send us details and we will respond soon.</p>
+      <!-- Replace with your real email below -->
+      <a href="mailto:yourstore@example.com" class="btn-secondary full-width">Send Email</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> Daraz Seller Shop. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout - Daraz Seller Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="top-bar">
+  <div class="logo" onclick="goHome()">Daraz Seller</div>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1>Checkout</h1>
+
+  <section class="checkout-layout">
+    <form class="checkout-form" onsubmit="submitOrder(event)">
+      <h2>Customer Details</h2>
+      <label>
+        Name
+        <input type="text" id="customer-name" required />
+      </label>
+      <label>
+        Phone number
+        <input type="tel" id="customer-phone" required />
+      </label>
+      <label>
+        Address
+        <textarea id="customer-address" rows="3" required></textarea>
+      </label>
+      <button type="submit" class="btn-primary full-width">Place Order via WhatsApp</button>
+    </form>
+
+    <aside class="order-summary">
+      <h2>Order Summary</h2>
+      <div id="summary-items"></div>
+      <div class="cart-total-row">
+        <span>Total:</span>
+        <span id="summary-total">Rs 0.00</span>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> Daraz Seller Shop. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

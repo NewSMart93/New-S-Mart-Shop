@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Daraz Seller Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="top-bar">
+  <div class="logo" onclick="goHome()">Daraz Seller</div>
+  <nav class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="contact.html">Contact</a>
+    <button class="cart-icon-btn" onclick="toggleCart()">
+      🛒 <span id="cart-count">0</span>
+    </button>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Welcome to <span class="brand-accent">Your Daraz Store</span></h1>
+    <p>Browse top Electronics, Home, Fashion and more at great prices.</p>
+  </section>
+
+  <section class="filters">
+    <div class="categories">
+      <button class="chip active" data-category="all" onclick="filterCategory('all', this)">All</button>
+      <button class="chip" data-category="Electronics" onclick="filterCategory('Electronics', this)">Electronics</button>
+      <button class="chip" data-category="Home" onclick="filterCategory('Home', this)">Home</button>
+      <button class="chip" data-category="Fashion" onclick="filterCategory('Fashion', this)">Fashion</button>
+      <button class="chip" data-category="Other" onclick="filterCategory('Other', this)">Other</button>
+    </div>
+  </section>
+
+  <section class="product-grid" id="product-grid">
+    <!-- Products injected by JS -->
+  </section>
+</main>
+
+<!-- Product Detail Modal -->
+<div class="modal-overlay" id="product-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeProductModal()">×</button>
+    <div class="modal-body">
+      <img id="modal-image" alt="Product image" class="modal-image" />
+      <div class="modal-content">
+        <h2 id="modal-name"></h2>
+        <p class="modal-price" id="modal-price"></p>
+        <p id="modal-description"></p>
+        <button class="btn-primary" id="modal-add-cart-btn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cart Drawer -->
+<aside class="cart-drawer" id="cart-drawer">
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button class="cart-close" onclick="toggleCart()">×</button>
+  </div>
+  <div id="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>Total:</span>
+      <span id="cart-total">Rs 0.00</span>
+    </div>
+    <button class="btn-primary full-width" onclick="goToCheckout()">Checkout</button>
+  </div>
+</aside>
+
+<div class="cart-backdrop" id="cart-backdrop" onclick="toggleCart()"></div>
+
+<footer class="footer">
+  <p>© <span id="year"></span> Daraz Seller Shop. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
