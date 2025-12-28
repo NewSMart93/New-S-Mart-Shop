@@ -57,7 +57,7 @@ const PRODUCTS = [
     price: 180,
     category: "Electronics",
     description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
-    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+    image: "https://images.unsplash.com/photo-1621905251547-48416daca1df?w=300&h=300&fit=crop"
   },
   {
     id: 8,
@@ -65,7 +65,7 @@ const PRODUCTS = [
     price: 480,
     category: "Electronics",
     description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
-    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+    image: "https://images.unsplash.com/photo-1621905251547-48416daca1df?w=300&h=300&fit=crop"
   },
   {
     id: 9,
@@ -73,7 +73,7 @@ const PRODUCTS = [
     price: 990,
     category: "Electronics",
     description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
-    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+    image: "https://images.unsplash.com/photo-1621905251547-48416daca1df?w=300&h=300&fit=crop"
   },
   {
     id: 10,
@@ -81,7 +81,7 @@ const PRODUCTS = [
     price: 1300,
     category: "Electronics",
     description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
-    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+    image: "https://images.unsplash.com/photo-1621905251547-48416daca1df?w=300&h=300&fit=crop"
   },
   {
     id: 11,
@@ -89,7 +89,7 @@ const PRODUCTS = [
     price: 1800,
     category: "Electronics",
     description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
-    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+    image: "https://images.unsplash.com/photo-1621905251547-48416daca1df?w=300&h=300&fit=crop"
   },
   {
     id: 12,
@@ -97,7 +97,7 @@ const PRODUCTS = [
     price: 2600,
     category: "Electronics",
     description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
-    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+    image: "https://images.unsplash.com/photo-1621905251547-48416daca1df?w=300&h=300&fit=crop"
   },
   {
     id: 13,
@@ -105,7 +105,7 @@ const PRODUCTS = [
     price: 4800,
     category: "Electronics",
     description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
-    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+    image: "https://images.unsplash.com/photo-1621905251547-48416daca1df?w=300&h=300&fit=crop"
   },
   {
     id: 14,
@@ -113,7 +113,7 @@ const PRODUCTS = [
     price: 9200,
     category: "Electronics",
     description: "High-quality CAT6 network cable. 1000Mbps Gigabit Ethernet speed with RJ45 connectors.",
-    image: "https://via.placeholder.com/300x300?text=Cat6Cable"
+    image: "https://images.unsplash.com/photo-1621905251547-48416daca1df?w=300&h=300&fit=crop"
   }
 ];
 
@@ -424,4 +424,5 @@ document.addEventListener("DOMContentLoaded", () => {
     renderSummary();
   }
 });
+
 
