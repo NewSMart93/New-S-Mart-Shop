@@ -1,189 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>S Mart - Premium Online Shopping Hub</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New S Mart - Online Shopping Sri Lanka</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-logo">
-                <span class="logo-icon">🛍️</span>
-                <span class="logo-text">S Mart</span>
-            </div>
-            <div class="navbar-search">
-                <input type="text" class="search-input" placeholder="Search products..." />
-                <button class="search-btn">🔍</button>
-            </div>
-            <div class="navbar-actions">
-                <button class="account-btn">👤 Account</button>
-                <button class="cart-btn" onclick="toggleCart()">
-                    🛒 <span id="cart-count">0</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Category Menu -->
-    <div class="category-menu">
-        <button class="category-item active" data-category="all" onclick="filterCategory('all', this)">
-            All Products
-        </button>
-        <button class="category-item" data-category="Electronics" onclick="filterCategory('Electronics', this)">
-            📱 Electronics
-        </button>
-        <button class="category-item" data-category="Home" onclick="filterCategory('Home', this)">
-            🏠 Home & Living
-        </button>
-        <button class="category-item" data-category="Fashion" onclick="filterCategory('Fashion', this)">
-            👗 Fashion
-        </button>
-        <button class="category-item" data-category="Other" onclick="filterCategory('Other', this)">
-            ⭐ More
-        </button>
+    <!-- Top Header -->
+    <div class="top-header">
+        <p>SAVE MORE ON APP</p>
+        <p>BECOME A SELLER</p>
+        <p>HELP & SUPPORT</p>
+        <p><a href="#login">LOGIN</a></p>
     </div>
 
-    <!-- Hero Banner -->
-    <section class="hero-banner">
-        <div class="hero-content">
-            <h1>Welcome to <span class="brand-accent">S Mart</span></h1>
-            <p>Discover exclusive deals on Electronics, Home essentials, Fashion & much more!</p>
-            <button class="cta-button">Shop Now</button>
+    <!-- Main Header/Navbar -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <span class="logo-text">New S Mart</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search in New S Mart" class="search-input">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="navbar-icons">
+                <div class="icon-item">
+                    <i class="fas fa-user"></i>
+                    <span>Account</span>
+                </div>
+                <div class="icon-item">
+                    <i class="fas fa-heart"></i>
+                    <span>Wishlist</span>
+                </div>
+                <div class="icon-item" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Cart (<span id="cartCount">0</span>)</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Navigation -->
+    <nav class="categories-nav">
+        <a href="#" class="category-item" data-category="all">All</a>
+        <a href="#" class="category-item" data-category="electronics">Electronics</a>
+        <a href="#" class="category-item" data-category="fashion">Fashion</a>
+        <a href="#" class="category-item" data-category="home">Home & Garden</a>
+        <a href="#" class="category-item" data-category="sports">Sports</a>
+        <a href="#" class="category-item" data-category="books">Books & Media</a>
+    </nav>
+
+    <!-- Banner Slider -->
+    <section class="banner-slider">
+        <div class="banner" style="background: linear-gradient(135deg, #FF6B35 0%, #004E89 100%);">
+            <div class="banner-content">
+                <span class="sale-badge">FLASH SALE</span>
+                <h1>Up to 80% OFF</h1>
+                <p>Seasonal Savings on Electronics & More</p>
+                <button class="shop-now-btn">Shop Now</button>
+            </div>
+            <div class="banner-image">
+                <div class="banner-product-icon">📱💻⌚</div>
+            </div>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="main-container">
-        <div class="sidebar">
-            <div class="filter-section">
-                <h3>Filters</h3>
-                <div class="filter-group">
-                    <label class="filter-label">
-                        <input type="checkbox" /> In Stock
-                    </label>
-                    <label class="filter-label">
-                        <input type="checkbox" /> On Sale
-                    </label>
-                </div>
-            </div>
-            <div class="price-filter">
-                <h4>Price Range</h4>
-                <input type="range" min="0" max="100000" value="50000" class="price-slider" />
-                <div class="price-display">Rs 0 - Rs <span id="price-max">50000</span></div>
+    <!-- Flash Sale Section -->
+    <section class="flash-sale">
+        <div class="section-header">
+            <h2><i class="fas fa-bolt"></i> Flash Sale</h2>
+            <div class="timer">
+                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
             </div>
         </div>
+        <div class="products-grid" id="flashSaleProducts"></div>
+    </section>
 
-        <div class="products-section">
-            <div class="products-header">
-                <h2>Featured Products</h2>
-                <select class="sort-select" onchange="sortProducts(this.value)">
-                    <option value="">Sort by: Relevance</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="newest">Newest First</option>
-                    <option value="rating">Top Rated</option>
-                </select>
-            </div>
-            <div class="product-grid" id="product-grid">
-                <!-- Products injected by JavaScript -->
-            </div>
+    <!-- All Products Section -->
+    <section class="products-section">
+        <div class="section-header">
+            <h2>Featured Products</h2>
+            <a href="#" class="view-all">View All ></a>
         </div>
-    </main>
-
-    <!-- Product Detail Modal -->
-    <div class="modal-overlay" id="product-modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeProductModal()">✕</button>
-            <div class="modal-body">
-                <img id="modal-image" alt="Product" class="modal-image" />
-                <div class="modal-info">
-                    <h2 id="modal-name"></h2>
-                    <div class="modal-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="review-count">(150 reviews)</span>
-                    </div>
-                    <p class="modal-price" id="modal-price"></p>
-                    <p class="modal-description" id="modal-description"></p>
-                    <div class="modal-actions">
-                        <button class="btn-add-cart" id="modal-add-cart-btn">Add to Cart</button>
-                        <button class="btn-wishlist">❤️ Add to Wishlist</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Shopping Cart Drawer -->
-    <div class="cart-drawer" id="cart-drawer">
-        <div class="cart-header">
-            <h2>Shopping Cart</h2>
-            <button class="cart-close" onclick="toggleCart()">✕</button>
-        </div>
-        <div class="cart-items" id="cart-items"></div>
-        <div class="cart-footer">
-            <div class="cart-summary">
-                <div class="summary-row">
-                    <span>Subtotal:</span>
-                    <span id="subtotal">Rs 0.00</span>
-                </div>
-                <div class="summary-row">
-                    <span>Shipping:</span>
-                    <span>Free</span>
-                </div>
-                <div class="summary-row total">
-                    <span>Total:</span>
-                    <span id="cart-total">Rs 0.00</span>
-                </div>
-            </div>
-            <button class="btn-checkout" onclick="goToCheckout()">Proceed to Checkout</button>
-            <button class="btn-continue" onclick="toggleCart()">Continue Shopping</button>
-        </div>
-    </div>
-    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>About S Mart</h4>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
-                </ul>
+                <h4>About New S Mart</h4>
+                <p>Your trusted online shopping partner in Sri Lanka. Premium quality products at competitive prices.</p>
             </div>
             <div class="footer-section">
                 <h4>Customer Service</h4>
                 <ul>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Returns</a></li>
                     <li><a href="#">FAQ</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Information</h4>
+                <h4>Quick Links</h4>
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Sell on New S Mart</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>Follow Us</h4>
                 <div class="social-links">
-                    <a href="#">Facebook</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Twitter</a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <span id="year"></span> S Mart. All rights reserved.</p>
+            <p>&copy; 2025 New S Mart. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <span class="close-cart">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div id="cartItems"></div>
+            <div class="cart-summary">
+                <p>Total: <strong>Rs. <span id="cartTotal">0</span></strong></p>
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
