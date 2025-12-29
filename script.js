@@ -1,65 +1,249 @@
-// Sample demo products
+// Sample products data with categories
 const PRODUCTS=[
-{id:1,name:'Wireless Earbuds Bluetooth 5.3',price:2999,category:'Electronics',description:'Comfortable, long-lasting battery life, great for music and calls.',image:'https://via.placeholder.com/300x300?text=Earbuds',rating:4.5},
-{id:2,name:'Fast Charging USB-C Cable 1m',price:699,category:'Electronics',description:'Durable cable with fast charging support for modern devices.',image:'https://via.placeholder.com/300x300?text=Cable',rating:4.2},
-{id:3,name:'Smart LED Desk Lamp',price:1499,category:'Electronics',description:'Adjustable brightness, USB powered, perfect for office work.',image:'https://via.placeholder.com/300x300?text=Lamp',rating:4.7},
-{id:4,name:'Premium Bed Sheets Set',price:1299,category:'Home',description:'Soft, breathable cotton, fits all bed sizes.',image:'https://via.placeholder.com/300x300?text=Sheets',rating:4.4},
-{id:5,name:'Kitchen Knife Set (6 pieces)',price:2499,category:'Home',description:'Stainless steel blades, perfect for all cutting needs.',image:'https://via.placeholder.com/300x300?text=Knives',rating:4.6},
-{id:6,name:'Throw Pillow Cushion',price:799,category:'Home',description:'Comfortable polyester fill, decorative design.',image:'https://via.placeholder.com/300x300?text=Pillow',rating:4.3},
-{id:7,name:'Classic Cotton T-Shirt',price:499,category:'Fashion',description:'Comfortable fit, available in multiple colors.',image:'https://via.placeholder.com/300x300?text=TShirt',rating:4.5},
-{id:8,name:'Denim Jeans (Slim Fit)',price:1899,category:'Fashion',description:'Premium denim, perfect for everyday wear.',image:'https://via.placeholder.com/300x300?text=Jeans',rating:4.6},
-{id:9,name:'Running Shoes Lightweight',price:3499,category:'Fashion',description:'Comfortable and durable for all-day wear.',image:'https://via.placeholder.com/300x300?text=Shoes',rating:4.7},
-{id:10,name:'Portable Phone Charger 20000mAh',price:1999,category:'Electronics',description:'Fast charging, compact design, suitable for all phones.',image:'https://via.placeholder.com/300x300?text=Charger',rating:4.8}
+  {id:1,name:'Wireless Earbuds Bluetooth 5.3',price:2999,category:'electronics',description:'Comfortable, long-lasting battery life',image:'🎧'},
+  {id:2,name:'Fast Charging USB-C Cable 1m',price:699,category:'electronics',description:'Durable cable with fast charging',image:'🔌'},
+  {id:3,name:'Smart LED Desk Lamp',price:1499,category:'electronics',description:'Adjustable brightness, USB powered',image:'💡'},
+  {id:4,name:'Premium Bed Sheets Set',price:1299,category:'home',description:'Soft, breathable cotton, fits all bed sizes',image:'🛏️'},
+  {id:5,name:'Kitchen Knife Set (6 pieces)',price:2499,category:'home',description:'Stainless steel blades, perfect for kitchen',image:'🔪'},
+  {id:6,name:'Throw Pillow Cushion',price:799,category:'home',description:'Comfortable polyester fill, decorative design',image:'🧡'},
+  {id:7,name:'Classic Cotton T-Shirt',price:499,category:'fashion',description:'Comfortable fit, available in multiple colors',image:'👕'},
+  {id:8,name:'Denim Jeans (Slim Fit)',price:1899,category:'fashion',description:'Premium denim, perfect for everyday wear',image:'👖'},
+  {id:9,name:'Running Shoes Lightweight',price:3499,category:'fashion',description:'Comfortable and durable for all-day wear',image:'👟'},
+  {id:10,name:'Portable Phone Charger 20000mAh',price:1999,category:'electronics',description:'Fast charging, compact design',image:'🔋'},
+  {id:11,name:'Yoga Mat Non-Slip',price:899,category:'sports',description:'Thick padding, eco-friendly material',image:'🧘'},
+  {id:12,name:'Stainless Steel Water Bottle',price:599,category:'sports',description:'Keeps water cool for 24 hours',image:'💧'},
+  {id:13,name:'Bluetooth Speaker Portable',price:2199,category:'electronics',description:'360 sound, waterproof design',image:'🔊'},
+  {id:14,name:'Office Chair Ergonomic',price:5999,category:'home',description:'Adjustable height and backrest',image:'🪑'},
+  {id:15,name:'Wireless Mouse Slim',price:799,category:'electronics',description:'Silent clicking, 18-month battery',image:'🖱️'},
 ];
 
 let cart=[];
 let currentFilter='all';
 let filteredProducts=PRODUCTS;
 
-// Initialize app
-window.addEventListener('load',()=>{
-renderedProducts();
-setYear();
+// Initialize the page
+document.addEventListener('DOMContentLoaded',function(){
+  renderProducts(PRODUCTS);
+  setupCategoryFilter();
+  setupCartIcon();
+  startFlashSaleTimer();
+  renderFlashSale();
 });
 
-// Set year in footer
-function setYear(){document.getElementById('year').textContent=new Date().getFullYear();}
+// Render products to the grid
+function renderProducts(productsToRender){
+  const productsGrid=document.getElementById('productsGrid');
+  productsGrid.innerHTML='';
+  
+  productsToRender.forEach(product=>{
+    const productCard=createProductCard(product);
+    productsGrid.appendChild(productCard);
+  });
+}
 
-// Render all products
-function renderedProducts(){const grid=document.getElementById('product-grid');grid.innerHTML='';filteredProducts.forEach(product=>{const card=document.createElement('div');card.className='product-card';card.innerHTML=`<div class='product-image-wrapper'><img src='${product.image}' alt='${product.name}' class='product-image'/></div><div class='product-info'><h3 class='product-name'>${product.name}</h3><p class='product-category'>${product.category}</p><p class='product-price'>Rs ${product.price.toLocaleString()}</p><p class='product-rating'>★★★★★ (${product.rating})</p><button class='product-btn' onclick='openProductModal(${product.id})'>View Details</button></div>`;card.addEventListener('click',()=>openProductModal(product.id));grid.appendChild(card);});}
+// Render flash sale products (first 4 products with discount)
+function renderFlashSale(){
+  const flashSaleGrid=document.getElementById('flashSaleProducts');
+  flashSaleGrid.innerHTML='';
+  
+  const flashSaleProducts=PRODUCTS.slice(0,4);
+  flashSaleProducts.forEach(product=>{
+    const productCard=createProductCard(product,true);
+    flashSaleGrid.appendChild(productCard);
+  });
+}
+
+// Create a single product card element
+function createProductCard(product,isFlashSale=false){
+  const card=document.createElement('div');
+  card.className='product-card';
+  
+  const discount=isFlashSale?Math.floor(Math.random()*40)+10:0;
+  const discountedPrice=Math.floor(product.price*(1-discount/100));
+  
+  card.innerHTML=`
+    <div class="product-image-container">${product.image}</div>
+    <div class="product-info">
+      <h3 class="product-name">${product.name}</h3>
+      <div class="product-price">
+        <span class="price-current">Rs. ${discountedPrice.toLocaleString()}</span>
+        ${isFlashSale?`<span class="price-old">Rs. ${product.price.toLocaleString()}</span>`:''}
+      </div>
+      ${isFlashSale?`<span class="discount">-${discount}%</span>`:''}
+      <div class="product-rating">⭐⭐⭐⭐⭐ (${Math.floor(Math.random()*500)+50})</div>
+      <div class="product-sold">${Math.floor(Math.random()*1000)+100} sold</div>
+      <button class="add-to-cart-btn" onclick="addToCart(${product.id},'${product.name}',${discountedPrice})">Add to Cart</button>
+    </div>
+  `;
+  
+  card.onclick=function(e){
+    if(!e.target.classList.contains('add-to-cart-btn')){
+      viewProductDetail(product.id);
+    }
+  };
+  
+  return card;
+}
+
+// Setup category filter
+function setupCategoryFilter(){
+  const categoryItems=document.querySelectorAll('.category-item');
+  categoryItems.forEach(item=>{
+    item.addEventListener('click',function(e){
+      e.preventDefault();
+      const category=this.getAttribute('data-category');
+      filterByCategory(category);
+      
+      categoryItems.forEach(i=>i.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+  
+  categoryItems[0].classList.add('active');
+}
 
 // Filter products by category
-function filterCategory(category,element){currentFilter=category;const buttons=document.querySelectorAll('.category-item');buttons.forEach(b=>b.classList.remove('active'));element.classList.add('active');filteredProducts=category==='all'?PRODUCTS:PRODUCTS.filter(p=>p.category===category);renderedProducts();}
-
-// Open product modal
-function openProductModal(productId){const product=PRODUCTS.find(p=>p.id===productId);if(!product)return;document.getElementById('modal-name').textContent=product.name;document.getElementById('modal-price').textContent=`Rs ${product.price.toLocaleString()}`;document.getElementById('modal-description').textContent=product.description;document.getElementById('modal-image').src=product.image;const addBtn=document.getElementById('modal-add-cart-btn');addBtn.onclick=()=>addToCart(productId);document.getElementById('product-modal').classList.add('show');}
-
-// Close product modal
-function closeProductModal(){document.getElementById('product-modal').classList.remove('show');}
+function filterByCategory(category){
+  if(category==='all'){
+    filteredProducts=PRODUCTS;
+  }else{
+    filteredProducts=PRODUCTS.filter(p=>p.category===category);
+  }
+  renderProducts(filteredProducts);
+}
 
 // Add product to cart
-function addToCart(productId){const product=PRODUCTS.find(p=>p.id===productId);const existingItem=cart.find(i=>i.id===productId);if(existingItem){existingItem.quantity+=1;}else{cart.push({...product,quantity:1});}updateCartCount();updateCartDisplay();closeProductModal();alert('Added to cart!');}
+function addToCart(id,name,price){
+  const existingItem=cart.find(item=>item.id===id);
+  
+  if(existingItem){
+    existingItem.qty+=1;
+  }else{
+    cart.push({id,name,price,qty:1});
+  }
+  
+  updateCartCount();
+  showCartNotification();
+}
 
 // Update cart count badge
-function updateCartCount(){document.getElementById('cart-count').textContent=cart.reduce((sum,item)=>sum+item.quantity,0);}
+function updateCartCount(){
+  document.getElementById('cartCount').textContent=cart.length;
+}
 
-// Update cart display
-function updateCartDisplay(){const cartItems=document.getElementById('cart-items');const subtotal=document.getElementById('subtotal');const total=document.getElementById('cart-total');if(cart.length===0){cartItems.innerHTML='<p style="padding:2rem;text-align:center;color:#999;">Your cart is empty</p>';}else{cartItems.innerHTML=cart.map(item=>`<div class='cart-item'><img src='${item.image}' alt='${item.name}'/><div class='cart-item-info'><div class='cart-item-name'>${item.name}</div><div class='cart-item-price'>Rs ${item.price.toLocaleString()}</div><div class='cart-item-controls'><button onclick='decreaseQty(${item.id})'>-</button><span>${item.quantity}</span><button onclick='increaseQty(${item.id})'>+</button><button class='cart-item-remove' onclick='removeFromCart(${item.id})'>Remove</button></div></div></div>`).join('');}const subtotalAmount=cart.reduce((sum,item)=>sum+(item.price*item.quantity),0);subtotal.textContent=`Rs ${subtotalAmount.toLocaleString()}`;total.textContent=`Rs ${subtotalAmount.toLocaleString()}`;}
+// Show notification when item added
+function showCartNotification(){
+  alert('Item added to cart!');
+}
 
-// Increase quantity
-function increaseQty(productId){const item=cart.find(i=>i.id===productId);if(item)item.quantity+=1;updateCartCount();updateCartDisplay();}
+// Setup cart icon click
+function setupCartIcon(){
+  const cartIcon=document.getElementById('cartIcon');
+  cartIcon.addEventListener('click',function(){
+    openCartModal();
+  });
+  
+  const closeCartBtn=document.querySelector('.close-cart');
+  closeCartBtn.addEventListener('click',function(){
+    closeCartModal();
+  });
+}
 
-// Decrease quantity
-function decreaseQty(productId){const item=cart.find(i=>i.id===productId);if(item){item.quantity=Math.max(1,item.quantity-1);}updateCartCount();updateCartDisplay();}
+// Open cart modal
+function openCartModal(){
+  const cartModal=document.getElementById('cartModal');
+  cartModal.classList.add('active');
+  renderCartItems();
+}
 
-// Remove from cart
-function removeFromCart(productId){cart=cart.filter(i=>i.id!==productId);updateCartCount();updateCartDisplay();}
+// Close cart modal
+function closeCartModal(){
+  const cartModal=document.getElementById('cartModal');
+  cartModal.classList.remove('active');
+}
 
-// Toggle cart drawer
-function toggleCart(){const drawer=document.getElementById('cart-drawer');const overlay=document.getElementById('cart-overlay');drawer.classList.toggle('open');overlay.classList.toggle('show');updateCartDisplay();}
+// Render cart items
+function renderCartItems(){
+  const cartItemsDiv=document.getElementById('cartItems');
+  cartItemsDiv.innerHTML='';
+  
+  if(cart.length===0){
+    cartItemsDiv.innerHTML='<p>Your cart is empty</p>';
+    document.getElementById('cartTotal').textContent='0';
+    return;
+  }
+  
+  let total=0;
+  cart.forEach(item=>{
+    const itemTotal=item.price*item.qty;
+    total+=itemTotal;
+    
+    const itemDiv=document.createElement('div');
+    itemDiv.style.cssText='padding:10px;border-bottom:1px solid #ccc;display:flex;justify-content:space-between;';
+    itemDiv.innerHTML=`
+      <div>
+        <strong>${item.name}</strong><br>
+        Price: Rs. ${item.price.toLocaleString()} x ${item.qty}
+      </div>
+      <div>Rs. ${itemTotal.toLocaleString()}</div>
+    `;
+    cartItemsDiv.appendChild(itemDiv);
+  });
+  
+  document.getElementById('cartTotal').textContent=total.toLocaleString();
+}
 
-// Go to checkout
-function goToCheckout(){if(cart.length===0){alert('Your cart is empty!');return;}window.location.href='checkout.html';}
+// View product detail (can be extended to show full product page)
+function viewProductDetail(productId){
+  const product=PRODUCTS.find(p=>p.id===productId);
+  alert(`Product: ${product.name}\nPrice: Rs. ${product.price.toLocaleString()}\nCategory: ${product.category}\n\n${product.description}\n\nClick 'Add to Cart' to purchase this item!`);
+}
 
-// Sort products
-function sortProducts(sortBy){if(sortBy==='price-low'){filteredProducts.sort((a,b)=>a.price-b.price);}else if(sortBy==='price-high'){filteredProducts.sort((a,b)=>b.price-a.price);}else if(sortBy==='rating'){filteredProducts.sort((a,b)=>b.rating-a.rating);}else{filteredProducts=currentFilter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.category===currentFilter);}renderedProducts();}
+// Flash sale countdown timer
+function startFlashSaleTimer(){
+  let hours=4;
+  let minutes=59;
+  let seconds=59;
+  
+  setInterval(function(){
+    seconds--;
+    if(seconds<0){
+      seconds=59;
+      minutes--;
+      if(minutes<0){
+        minutes=59;
+        hours--;
+        if(hours<0){
+          hours=4;
+          minutes=59;
+          seconds=59;
+        }
+      }
+    }
+    
+    document.getElementById('hours').textContent=String(hours).padStart(2,'0');
+    document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');
+    document.getElementById('seconds').textContent=String(seconds).padStart(2,'0');
+  },1000);
+}
+
+// Search functionality
+document.addEventListener('DOMContentLoaded',function(){
+  const searchInput=document.getElementById('searchInput');
+  searchInput.addEventListener('input',function(){
+    const searchTerm=this.value.toLowerCase();
+    const filtered=PRODUCTS.filter(p=>
+      p.name.toLowerCase().includes(searchTerm)||
+      p.description.toLowerCase().includes(searchTerm)
+    );
+    renderProducts(filtered);
+  });
+});
+
+// Close cart when clicking outside
+window.addEventListener('click',function(event){
+  const cartModal=document.getElementById('cartModal');
+  if(event.target===cartModal){
+    closeCartModal();
+  }
+});
