@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Login - New S Mart Seller Center</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body { background: linear-gradient(135deg, #FF6B35 0%, #004E89 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .login-container { max-width: 450px; width: 100%; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+    .seller-header { text-align: center; margin-bottom: 40px; }
+    .seller-header h1 { color: #FF6B35; font-size: 2rem; margin: 0 0 10px 0; }
+    .seller-header p { color: #666; margin: 0; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
+    .form-group input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; transition: all 0.3s; box-sizing: border-box; }
+    .form-group input:focus { outline: none; border-color: #FF6B35; box-shadow: 0 0 0 3px rgba(255,107,53,0.1); }
+    .login-btn { width: 100%; padding: 12px; background: #FF6B35; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px; transition: all 0.3s; }
+    .login-btn:hover { background: #E55A24; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(255,107,53,0.3); }
+    .signup-link { text-align: center; margin-top: 20px; color: #666; }
+    .signup-link a { color: #FF6B35; text-decoration: none; font-weight: 600; cursor: pointer; }
+    .signup-link a:hover { text-decoration: underline; }
+    .register-form { display: none; }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Login Form -->
+    <div id="loginForm">
+      <div class="seller-header">
+        <h1><i class="fas fa-store"></i> New S Mart</h1>
+        <p>Seller Center Login</p>
+      </div>
+      <div class="form-group">
+        <label>Seller Email</label>
+        <input type="email" id="loginEmail" placeholder="Enter your seller email">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password">
+      </div>
+      <button class="login-btn" onclick="sellerLogin()"><i class="fas fa-sign-in-alt"></i> Login to Seller Center</button>
+      <div class="signup-link">
+        Don't have a seller account? <a onclick="toggleForm()">Register as Seller</a>
+      </div>
+    </div>
+    <!-- Registration Form -->
+    <div id="registerForm" class="register-form">
+      <div class="seller-header">
+        <h1><i class="fas fa-store"></i> New S Mart</h1>
+        <p>Become a Seller</p>
+      </div>
+      <div class="form-group">
+        <label>Business Name</label>
+        <input type="text" id="businessName" placeholder="Your business name">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="regEmail" placeholder="Your email">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="regPhone" placeholder="Your contact number">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="Create a strong password">
+      </div>
+      <button class="login-btn" onclick="sellerRegister()"><i class="fas fa-user-plus"></i> Register as Seller</button>
+      <div class="signup-link">
+        Already have a seller account? <a onclick="toggleForm()">Login Here</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleForm(){document.getElementById('loginForm').classList.toggle('register-form');document.getElementById('registerForm').classList.toggle('register-form');}
+    function sellerLogin(){const email=document.getElementById('loginEmail').value;const password=document.getElementById('loginPassword').value;if(!email||!password){alert('Please enter email and password');return;}const sellers=JSON.parse(localStorage.getItem('sellers')||'[]');const seller=sellers.find(s=>s.email===email&&s.password===password);if(!seller){alert('Invalid email or password');return;}localStorage.setItem('currentSeller',JSON.stringify(seller));window.location='seller-center.html';}
+    function sellerRegister(){const business=document.getElementById('businessName').value;const email=document.getElementById('regEmail').value;const phone=document.getElementById('regPhone').value;const password=document.getElementById('regPassword').value;if(!business||!email||!phone||!password){alert('Please fill all fields');return;}const sellers=JSON.parse(localStorage.getItem('sellers')||'[]');if(sellers.find(s=>s.email===email)){alert('Email already registered');return;}const seller={id:Date.now(),businessName:business,email:email,phone:phone,password:password,createdAt:new Date().toISOString(),products:[]};sellers.push(seller);localStorage.setItem('sellers',JSON.stringify(sellers));localStorage.setItem('currentSeller',JSON.stringify(seller));alert('Seller account created! Redirecting to dashboard...');window.location='seller-center.html';}
+  </script>
+</body>
+</html>
