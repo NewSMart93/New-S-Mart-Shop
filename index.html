@@ -23,17 +23,18 @@
                 <span class="logo-text">New S Mart</span>
             </div>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search in New S Mart" class="search-input">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
+                <input type="text" id="searchInput" placeholder="Search products..." class="search-input" aria-label="Search products">
+                <button class="search-btn" aria-label="Search"><i class="fas fa-search"></i></button>
+                <div id="searchSuggestions" class="search-suggestions"></div>
             </div>
             <div class="navbar-icons">
-                <div class="icon-item">
+                <div class="icon-item" id="accountIcon">
                     <i class="fas fa-user"></i>
                     <span>Account</span>
                 </div>
-                <div class="icon-item">
+                <div class="icon-item" id="wishlistIcon">
                     <i class="fas fa-heart"></i>
-                    <span>Wishlist</span>
+                    <span>Wishlist <span id="wishlistCount">(0)</span></span>
                 </div>
                 <div class="icon-item" id="cartIcon">
                     <i class="fas fa-shopping-cart"></i>
@@ -45,7 +46,7 @@
 
     <!-- Category Navigation -->
     <nav class="categories-nav">
-        <a href="#" class="category-item" data-category="all">All</a>
+        <a href="#home" class="category-item active" data-category="all">All</a>
         <a href="#" class="category-item" data-category="electronics">Electronics</a>
         <a href="#" class="category-item" data-category="fashion">Fashion</a>
         <a href="#" class="category-item" data-category="home">Home & Garden</a>
@@ -53,40 +54,52 @@
         <a href="#" class="category-item" data-category="books">Books & Media</a>
     </nav>
 
-    <!-- Banner Slider -->
-    <section class="banner-slider">
-        <div class="banner" style="background: linear-gradient(135deg, #FF6B35 0%, #004E89 100%);">
-            <div class="banner-content">
-                <span class="sale-badge">FLASH SALE</span>
-                <h1>Up to 80% OFF</h1>
-                <p>Seasonal Savings on Electronics & More</p>
-                <button class="shop-now-btn">Shop Now</button>
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Banner Slider -->
+        <section class="banner-slider" id="home">
+            <div class="banner" style="background: linear-gradient(135deg, #FF6B35 0%, #004E89 100%);">
+                <div class="banner-content">
+                    <span class="sale-badge">FLASH SALE</span>
+                    <h1>Up to 80% OFF</h1>
+                    <p>Seasonal Savings on Electronics & More</p>
+                    <button class="shop-now-btn">Shop Now</button>
+                </div>
+                <div class="banner-image">
+                    <div class="banner-product-icon">📱💻⌚</div>
+                </div>
             </div>
-            <div class="banner-image">
-                <div class="banner-product-icon">📱💻⌚</div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Flash Sale Section -->
-    <section class="flash-sale">
-        <div class="section-header">
-            <h2><i class="fas fa-bolt"></i> Flash Sale</h2>
-            <div class="timer">
-                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+        <!-- Flash Sale Section -->
+        <section class="flash-sale">
+            <div class="section-header">
+                <h2><i class="fas fa-bolt"></i> Flash Sale</h2>
+                <div class="timer">
+                    <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+                </div>
             </div>
-        </div>
-        <div class="products-grid" id="flashSaleProducts"></div>
-    </section>
+            <div class="products-grid" id="flashSaleProducts"></div>
+        </section>
 
-    <!-- All Products Section -->
-    <section class="products-section">
-        <div class="section-header">
-            <h2>Featured Products</h2>
-            <a href="#" class="view-all">View All ></a>
-        </div>
-        <div class="products-grid" id="productsGrid"></div>
-    </section>
+        <!-- AI Recommendations Section -->
+        <section class="recommendations-section">
+            <div class="section-header">
+                <h2><i class="fas fa-magic"></i> Recommended For You</h2>
+                <p class="section-subtitle">AI-powered recommendations based on your browsing</p>
+            </div>
+            <div class="products-grid" id="recommendedProducts"></div>
+        </section>
+
+        <!-- All Products Section -->
+        <section class="products-section">
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <a href="#" class="view-all">View All ></a>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -122,20 +135,30 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 New S Mart. All rights reserved.</p>
+            <p>© 2025 New S Mart. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Cart Modal -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
-            <span class="close-cart">&times;</span>
+            <span class="close-cart">×</span>
             <h2>Shopping Cart</h2>
             <div id="cartItems"></div>
             <div class="cart-summary">
                 <p>Total: <strong>Rs. <span id="cartTotal">0</span></strong></p>
                 <button class="checkout-btn">Proceed to Checkout</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div class="modal" id="accountModal">
+        <div class="modal-content">
+            <span class="close-modal">×</span>
+            <h2>Account</h2>
+            <p>Login to access your account, wishlists, and order history.</p>
+            <button class="login-btn">Sign In</button>
         </div>
     </div>
 
